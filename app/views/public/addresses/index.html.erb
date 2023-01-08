@@ -1,0 +1,18 @@
+<h1>配送先登録/一覧</h1>
+  <%= form_with model: @address do |f| %>
+    <h4>郵便番号</h4>
+      <%= f.text_field :postal_code %>
+    <h4>住所</h4>
+      <%= f.text_field :address %>
+    <h4>宛名</h4>
+      <%= f.text_field :name %>
+    <%= f.submit '新規登録', class:"btn btn-success" %>
+  <% end %>
+
+  <% @addresses.each do |address| %>
+   <div>
+    <p>郵便番号：<%= address.postal_code %></p>
+    <p>住所：<%= address.address %></p>
+    <p>宛名：<%= address.name %></p>
+   </div>
+  <% end %>
