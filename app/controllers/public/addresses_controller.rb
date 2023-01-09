@@ -1,6 +1,6 @@
 class Public::AddressesController < ApplicationController
   def index
-    @address = Address.new(address_params)
+    @address = Address.new
     @addresses = Address.all
 
     respond_to do |wants|
@@ -14,18 +14,14 @@ class Public::AddressesController < ApplicationController
   end
 
   def create
-    @address = Address.new(params[:address])
-
-    respond_to do |wants|
+    @address = Address.new(address_params)
       if @address.save
         flash[:notice] = 'Address was successfully created.'
-        wants.html { redirect_to "/address" }
-        wants.xml  { render :xml => @address, :status => :created, :location => @address }
+        redirect_to "/address"
       else
-        wants.html { render :action => "new" }
-        wants.xml  { render :xml => @address.errors, :status => :unprocessable_entity }
+        @addresses = Address.all
+        render :index
       end
-    end
   end
 
   def update

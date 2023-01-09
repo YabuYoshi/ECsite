@@ -28,13 +28,16 @@
       </li>
     <% elsif admin_signed_in? %>
       <li>
-        <%= link_to "ログアウト", destroy_admin_session_path, method: :delete %>
+        <%= link_to "商品一覧", destroy_admin_session_path, method: :delete %>
       </li>
       <li>
-        <%= link_to "ログアウト", destroy_admin_session_path, method: :delete %>
+        <%= link_to "会員一覧", destroy_admin_session_path, method: :delete %>
       </li>
       <li>
-        <%= link_to "ログアウト", destroy_admin_session_path, method: :delete %>
+        <%= link_to "注文履歴一覧", destroy_admin_session_path, method: :delete %>
+      </li>
+      <li>
+        <%= link_to "ジャンル一覧", destroy_admin_session_path, method: :delete %>
       </li>
       <li>
         <%= link_to "ログアウト", destroy_admin_session_path, method: :delete %>
