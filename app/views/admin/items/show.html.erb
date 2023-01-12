@@ -1,0 +1,11 @@
+<div>
+  <%= image_tag @item.get_image %>
+  <p>商品名：<%= @item.name %></p>
+  <p>商品説明：<%= @item.introduction %></p>
+  <p>画像：<%= image_tag 'sample-author1.jpg' %></p>
+  <p>ジャンル：<%= @item.user.name %></p>
+  <p>税込価格：<%= @item.created_at.strftime('%Y/%m/%d') %></p>
+  <p>税抜価格：<%= @item.created_at.strftime('%Y/%m/%d') %></p>
+  <p>販売ステータス：<%= @item.created_at.strftime('%Y/%m/%d') %></p>
+  <%= link_to "編集する", edit_item_path(@item.id), class:"btn btn-success" %>
+</div>

@@ -1,0 +1,14 @@
+<h2>商品一覧</h2>
+
+<% @items.each do |item| %>
+<div>
+  <%= image_tag post_image.get_image %>
+  <p>商品ID：<%= item.id %></p>
+  <p>商品名：<%= item.name %></p>
+  <p>税抜価格：<%= item.price %></p>
+  <p>ジャンル：<%= item.genre %></p>
+  <p>ステータス：<%= item.is_active %></p>
+</div>
+<% end %>
+
+
