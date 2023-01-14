@@ -1,11 +1,19 @@
+<h2>商品詳細</h2>
+
 <div>
-  <%= image_tag @item.get_image %>
+  <%= image_tag @item.get_image(100,100) %>
   <p>商品名：<%= @item.name %></p>
   <p>商品説明：<%= @item.introduction %></p>
-  <p>画像：<%= image_tag 'sample-author1.jpg' %></p>
-  <p>ジャンル：<%= @item.user.name %></p>
-  <p>税込価格：<%= @item.created_at.strftime('%Y/%m/%d') %></p>
-  <p>税抜価格：<%= @item.created_at.strftime('%Y/%m/%d') %></p>
-  <p>販売ステータス：<%= @item.created_at.strftime('%Y/%m/%d') %></p>
-  <%= link_to "編集する", edit_item_path(@item.id), class:"btn btn-success" %>
+  <p>ジャンル：<%= @item.genre.name %></p>
+  <p>税込価格：<%= @item.with_tax_price %></p>
+  <p>税抜価格：<%= @item.price %></p>
+  <p>
+    <% if @item.is_active == true %>
+      販売ステータス 販売中
+    <% else %>
+      販売ステータス 販売停止中
+    <% end %>
+  </p>
+  <%= link_to "編集する", edit_admin_item_path(@item.id), class:"btn btn-success" %>
 </div>
+
