@@ -2,11 +2,6 @@ class Public::AddressesController < ApplicationController
   def index
     @address = Address.new
     @addresses = Address.all
-
-    respond_to do |wants|
-      wants.html # index.html.erb
-      wants.xml  { render :xml => @addresses }
-    end
   end
 
   def edit
@@ -27,9 +22,7 @@ class Public::AddressesController < ApplicationController
 
   def update
     @address = Address.find(params[:id])
-
-    respond_to do |wants|
-      if @address.update_attributes(params[:address])
+      if @address.update(address_params)
         flash[:notice] = 'Address was successfully updated.'
         wants.html { redirect_to(@address) }
         wants.xml  { head :ok }

@@ -1,22 +1,18 @@
 class Public::CustomersController < ApplicationController
 
  def show
-  @customer = Customer.find(params[:id])
-  respond_to do |wants|
-    wants.html # show.html.erb
-    wants.xml  { render :xml => @customer }
-  end
+  @customer = current_customer
  end
 
  def edit
-   @customer = Customer.find(params[:id])
+   @customer = current_customer
  end
 
  def update
-   @customer = Customer.find(params[:id])
+   @customer = current_customer
      if @customer.update(customer_params)
        flash[:notice] = 'Customer was successfully updated.'
-       redirect_to customer_path(@customer.id)
+       redirect_to customers_path
      else
        render :edit
      end
@@ -26,6 +22,9 @@ class Public::CustomersController < ApplicationController
  end
 
  def withdrawal
+  current_customer.update(is_deleted: true)
+  reset_session
+  redirect_to root_path
  end
 
  private

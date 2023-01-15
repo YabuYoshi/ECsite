@@ -1,0 +1,13 @@
+<div>
+  <%= image_tag @item.get_image(100,100) %>
+  <p>商品名：<%= @item.name %></p>
+  <p>商品説明：<%= @item.introduction %></p>
+  <p>￥<%= @item.with_tax_price %> </p>
+  <%= form_with model: @cart_item, url: cart_items_path, method: :post do |f| %>
+  <p>数量を選択してください <br />
+    <%= f.select :amount, *[1..99] %>
+  </p>
+  <%= f.hidden_field :item_id, :value => @item.id %>
+  <%= f.submit "カートに入れる", class:"btn btn-success" %>
+  <% end %>
+</div>
