@@ -1,0 +1,17 @@
+<h2>会員一覧</h2>
+<% @customers.each do |customer| %>
+<div>
+  <p>会員ID：<%= customer.id %></p>
+  <p>氏名：<%= customer.name %></p>
+  <p>メールアドレス：<%= customer.email %></p>
+  <p>
+    <% if customer.is_deleted == false %>
+      ステータス: 有効
+    <% else %>
+      ステータス: 退会
+    <% end %>
+  </p>
+</div>
+<% end %>
+
+<%= paginate @customers %>

@@ -14,10 +14,10 @@
   <label for="inputName">税抜価格</label>
   <%= f.text_field :price, autofocus: true, id:"inputName", placeholder:"税抜価格"%> <br />
   <label for="inputName">販売ステータス</label>
-  <%= f.radio_button :is_active, true %>
-  <%= f.label :販売中, autofocus:true, id:"inputName",placeholder:"販売中"%>
-  <%= f.radio_button :is_active, false %>
-  <%= f.label :販売停止中, autofocus:false, id:"inputName",placeholder:"販売停止中"%> <br />
+  <%= f.radio_button :is_deleted, false %>
+  <%= f.label :有効, autofocus:false, id:"inputName",placeholder:"有効"%>
+  <%= f.radio_button :is_deleted, true %>
+  <%= f.label :退会, autofocus:true, id:"inputName",placeholder:"退会"%> <br />
 
   <%= f.submit "編集内容を保存",class:"btn btn-success" %>
 <% end %>
