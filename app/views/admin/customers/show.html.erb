@@ -1,7 +1,7 @@
-<h2><%= current_customer.last_name %><%= current_customer.first_name %>さんの会員詳細</h2>
+<h2><%= @customer.last_name %><%= @customer.first_name %>さんの会員詳細</h2>
 
 <div>
-  <p>会員ID：<%= @item.id %></p>
+  <p>会員ID：<%= @customer.id %></p>
   <p>
     氏名：<%= @customer.last_name %>
           <%= @customer.first_name %>
