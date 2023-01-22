@@ -5,9 +5,10 @@ class Public::OrdersController < ApplicationController
 
   def create
     @order = Order.new(order_params)
+    @order.customer_id = current_customer.id
       if @order.save
         flash[:notice] = 'ModelClassName was successfully created.'
-        redirect_to "/orders/confirm"
+        redirect_to :complete
       else
         render :new
       end
@@ -19,6 +20,7 @@ class Public::OrdersController < ApplicationController
 
   def show
     @order = Order.find(params[:id])
+    @cart_items = current_customer.cart_items
   end
 
   def confirm
@@ -39,7 +41,7 @@ class Public::OrdersController < ApplicationController
   private
 
   def order_params
-    params.require(:order).permit(:shipping_cost, :postal_code, :address, :name, :total_payment, :order_status, :payment_method)
+    params.require(:order).permit(:shipping_cost, :postal_code, :address, :name, :total_payment, :payment_method)
   end
 
 end

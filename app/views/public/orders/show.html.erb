@@ -1,0 +1,60 @@
+<h2>注文履歴詳細</h2>
+<table>
+  <h2>注文情報</h2>
+  <thead>
+      <th>注文日</th>
+      <th>配送先</th>
+      <th>支払方法</th>
+      <th>ステータス</th>
+  </thead>
+  <tbody>
+    <tr>
+      <td><%= @order.created_at.strftime('%Y/%m/%d') %></td>
+      <td>
+　      <%= @order.postal_code %>
+        <%= @order.address %>
+        <%= @order.name %>
+      </td>
+      <td><%= @order.payment_method %></td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
+
+<table>
+  <h2>注文内容</h2>
+  <thead>
+      <th>商品</th>
+      <th>単価</th>
+      <th>個数</th>
+      <th>小計</th>
+  </thead>
+  <tbody>
+  <% total = 0 %>
+  <% @cart_items.each do |cart_item| %>
+      <tr>
+        　<td><%= cart_item.item.name %></td>
+          <td><%= cart_item.item.with_tax_price %></td>
+          <td><%= cart_item.amount %></td>
+          <td><%= cart_item.subtotal %></td>
+          <% total +=  cart_item.subtotal %>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<table>
+  <h2>請求情報</h2>
+  <thead>
+      <th>商品合計</th>
+      <th>配送料</th>
+      <th>ご請求額</th>
+  </thead>
+  <tbody>
+      <tr>
+        <td><%= @order.shipping_cost %></td>
+        <td><%= total %></td>
+        <td><%= @order.shipping_cost + total %></td>
+      </tr>
+  </tbody>
+</table>
