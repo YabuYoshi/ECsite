@@ -31,6 +31,12 @@ class Public::CartItemsController < ApplicationController
     redirect_to "/cart_items"
   end
 
+  def destroy_all
+    @cart_item = CartItem.all
+    @cart_item.destroy_all
+    redirect_to "/cart_items"
+  end
+
   private
   def cart_item_params
     params.require(:cart_item).permit(:item_id, :amount)
