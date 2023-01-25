@@ -30,7 +30,6 @@ class Public::AddressesController < ApplicationController
         wants.html { render :action => "edit" }
         wants.xml  { render :xml => @address.errors, :status => :unprocessable_entity }
       end
-    end
   end
 
   def destroy

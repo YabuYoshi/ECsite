@@ -10,10 +10,10 @@ class Public::OrdersController < ApplicationController
         current_customer.cart_items.each do |cart_item|
           @order_detail = OrderDetail.new
           @order_detail.item_id = cart_item.item_id
-          @order_detail.order_id = cart_item.customer_id
+          @order_detail.order_id = @order.id
           @order_detail.amount = cart_item.amount
           @order_detail.price = cart_item.item.price
-          @order_detail.save
+          @order_detail.save!
         end
         current_customer.cart_items.destroy_all
         flash[:notice] = 'ModelClassName was successfully created.'
