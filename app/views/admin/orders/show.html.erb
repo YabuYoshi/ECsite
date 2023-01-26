@@ -17,7 +17,7 @@
         <%= @order.name %>
       </td>
       <td><%= @order.payment_method %></td>
-      <td></td>
+      <td><%= order_detail.making_status_i18n %></td>
     </tr>
   </tbody>
 </table>
@@ -38,7 +38,7 @@
           <td><%= order_detail.item.with_tax_price %></td>
           <td><%= order_detail.amount %></td>
           <td><%= order_detail.subtotal %></td>
-          <td><%= order_detail.making_status %></td>
+          <td><%= order_detail.making_status_i18n %></td>
       </tr>
   <% end %>
   </tbody>

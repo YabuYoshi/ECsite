@@ -14,5 +14,9 @@
     <p>郵便番号：<%= address.postal_code %></p>
     <p>住所：<%= address.address %></p>
     <p>宛名：<%= address.name %></p>
+     <%= link_to "編集する",  edit_address_path(address.id), class:"btn btn-success" %>
+   　<% if address.customer == current_customer %>
+    　　<%= link_to "削除する", address_path(address), method: :delete %>
+  　 <% end %>
    </div>
   <% end %>

@@ -15,8 +15,8 @@
         <%= @order.address %>
         <%= @order.name %>
       </td>
-      <td><%= @order.payment_method %></td>
-      <td></td>
+      <td><%= @order.payment_method_i18n %></td>
+      <td><%= @order.order_status_i18n %></td>
     </tr>
   </tbody>
 </table>
@@ -31,15 +31,16 @@
   </thead>
   <tbody>
   <% total = 0 %>
-  <% @cart_items.each do |cart_item| %>
+    <% @orders.each do |order| %>
       <tr>
-        　<td><%= cart_item.item.name %></td>
-          <td><%= cart_item.item.with_tax_price %></td>
-          <td><%= cart_item.amount %></td>
-          <td><%= cart_item.subtotal %></td>
-          <% total +=  cart_item.subtotal %>
+        <% order.order_details.each do |order_detail| %>
+        　<td><%= order_detail.item.name %></td>
+          <td><%= order_detail.amount %></td>
+          <td><%= (order_detail.price*1.1).floor %></td>
+          <td><%= (order_detail.subtotal*1.1).floor %></td>
+        <% end %>
       </tr>
-  <% end %>
+    <% end %>
   </tbody>
 </table>
 
@@ -52,9 +53,9 @@
   </thead>
   <tbody>
       <tr>
+        <td><%= @order.total_payment - @order.shipping_cost %></td>
         <td><%= @order.shipping_cost %></td>
-        <td><%= total %></td>
-        <td><%= @order.shipping_cost + total %></td>
+        <td><%= @order.total_payment %></td>
       </tr>
   </tbody>
 </table>

@@ -13,7 +13,7 @@ class Public::OrdersController < ApplicationController
           @order_detail.order_id = @order.id
           @order_detail.amount = cart_item.amount
           @order_detail.price = cart_item.item.price
-          @order_detail.save!
+          @order_detail.save
         end
         current_customer.cart_items.destroy_all
         flash[:notice] = 'ModelClassName was successfully created.'
@@ -30,6 +30,8 @@ class Public::OrdersController < ApplicationController
   def show
     @order = Order.find(params[:id])
     @cart_items = current_customer.cart_items
+    @order.shipping_cost = 800
+    @orders = Order.all
   end
 
   def confirm

@@ -13,7 +13,7 @@ class Public::AddressesController < ApplicationController
     @address.customer_id = current_customer.id
       if @address.save
         flash[:notice] = 'Address was successfully created.'
-        redirect_to "/address"
+        redirect_to "/addresses"
       else
         @addresses = Address.all
         render :index
@@ -24,22 +24,16 @@ class Public::AddressesController < ApplicationController
     @address = Address.find(params[:id])
       if @address.update(address_params)
         flash[:notice] = 'Address was successfully updated.'
-        wants.html { redirect_to(@address) }
-        wants.xml  { head :ok }
+        redirect_to "/addresses"
       else
-        wants.html { render :action => "edit" }
-        wants.xml  { render :xml => @address.errors, :status => :unprocessable_entity }
+        render :edit
       end
   end
 
   def destroy
     @address = Address.find(params[:id])
     @address.destroy
-
-    respond_to do |wants|
-      wants.html { redirect_to(addresss_url) }
-      wants.xml  { head :ok }
-    end
+    redirect_to "/addresses"
   end
 
   private
