@@ -16,8 +16,13 @@
         <%= @order.address %>
         <%= @order.name %>
       </td>
-      <td><%= @order.payment_method %></td>
-      <td><%= order_detail.making_status_i18n %></td>
+      <td><%= @order.payment_method_i18n %></td>
+      <%= form_with model: @order, url: admin_order_path(@order.id) do |f| %>
+      <td>
+          <%= f.select :order_status, Order.order_statuses_i18n.keys.map { |k| [t("enums.order.order_status.#{k}"), k] } %>
+          <%= f.submit "更新",class:"btn btn-success" %>
+      </td>
+      <% end %>
     </tr>
   </tbody>
 </table>
@@ -37,8 +42,13 @@
         　<td><%= order_detail.item.name %></td>
           <td><%= order_detail.item.with_tax_price %></td>
           <td><%= order_detail.amount %></td>
-          <td><%= order_detail.subtotal %></td>
-          <td><%= order_detail.making_status_i18n %></td>
+          <td><%= order_detail.item.with_tax_price * order_detail.amount %></td>
+          <%= form_with model: order_detail, url: admin_order_detail_path(order_detail.id) do |f| %>
+          <td>
+            <%= f.select :making_status, OrderDetail.making_statuses_i18n.keys.map { |k| [t("enums.order_detail.making_status.#{k}"), k] } %>
+            <%= f.submit "更新",class:"btn btn-success" %>
+          </td>
+          <% end %>
       </tr>
   <% end %>
   </tbody>
@@ -53,9 +63,9 @@
   </thead>
   <tbody>
       <tr>
+        <td><%= @order.total_payment - @order.shipping_cost %></td>
         <td><%= @order.shipping_cost %></td>
-        <td><%= total %></td>
-        <td><%= @order.shipping_cost + total %></td>
+        <td><%= @order.total_payment %></td>
       </tr>
   </tbody>
 </table>

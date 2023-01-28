@@ -1,16 +1,16 @@
 class Admin::OrdersController < ApplicationController
   def show
     @order = Order.find(params[:id])
-    @order_details = OrderDetail.all
+    @order_details = @order.order_details
   end
 
   def update
     @order = Order.find(params[:id])
       if @order.update(order_params)
         flash[:notice] = 'ModelClassName was successfully updated.'
-        redirect_to
+        redirect_to :show
       else
-        render :action
+        render :top
       end
   end
 

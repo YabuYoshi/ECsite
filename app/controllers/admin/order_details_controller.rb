@@ -3,9 +3,9 @@ class Admin::OrderDetailsController < ApplicationController
     @order_detail = OrderDetail.find(params[:id])
       if @order_detail.update(order_detail_params)
         flash[:notice] = 'ModelClassName was successfully updated.'
-        redirect_to
+        redirect_to :show
       else
-        render :action
+        render :top
       end
   end
 
