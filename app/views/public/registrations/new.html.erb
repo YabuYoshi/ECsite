@@ -1,8 +1,7 @@
-<h2>新規会員登録</h2>
-
+<table>
   <%= form_with model: @customer,url: customer_registration_path do |f| %>
   <%= render "public/shared/error_messages", resource: resource %>
-
+  <h2>新規会員登録</h2>
   <div class="field">
   <%= f.label :名前 %>
   <%= f.label :姓 %>
@@ -26,6 +25,7 @@
 
   <div class="field">
   <%= f.label :郵便番号 %>
+  <em>(ハイフンなし)</em>
   <%= f.text_field :postal_code %>
   </div>
 
@@ -36,25 +36,31 @@
 
   <div class="field">
   <%= f.label :電話番号 %>
+  <em>(ハイフンなし)</em>
   <%= f.text_field :telephone_number %>
   </div>
 
   <div class="field">
     <%= f.label :パスワード %>
     <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
+    <em>(<%= @minimum_password_length %>文字以上)</em>
     <% end %>
     <%= f.password_field :password, autocomplete: "new-password" %>
   </div>
 
   <div class="field">
     <%= f.label :password_confirmation %>
+    <em>(確認用)</em>
     <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
   </div>
 
   <div class="actions">
-    <%= f.submit "新規登録" %>
+    <%= f.submit "新規登録", class:"btn btn-success" %>
   </div>
 <% end %>
 
 <%= render "public/shared/links" %>
+
+</table>
+
+
