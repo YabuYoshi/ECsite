@@ -1,23 +1,44 @@
 <h2>商品一覧</h2>
-<li>
-  <%= link_to '+', "/admin/items/new" %>
-</li>
+<p>
+  <%= link_to '＋', "/admin/items/new",class:"btn btn-light" %>
+</p>
 
 <% @items.each do |item| %>
-<div>
-  <p>商品ID：<%= item.id %></p>
-  <p>商品名：<%= item.name %></p>
-  <p>税抜価格：<%= item.price %></p>
-  <p>ジャンル名：<%= item.genre.name %></p>
-  <p>
-    <% if item.is_active == true %>
-      ステータス: 販売中
-    <% else %>
-      ステータス: 販売停止中
-    <% end %>
-  </p>
-</div>
+ <div class="table table-bordered">
+  <table>
+    <tbody>
+      <tr>
+        <td>商品ID</td>
+        <td><%= item.id %></td>
+      </tr>
+      <tr>
+        <td>商品名</td>
+        <td>
+          <%= link_to admin_item_path(item.id) do %>
+          <%= item.name %>
+          <% end %>
+        </td>
+      </tr>
+      <tr>
+        <td>税抜価格</td>
+        <td><%= item.price %></td>
+      </tr>
+      <tr>
+        <td>ジャンル名</td>
+        <td><%= item.genre.name %></td>
+      </tr>
+      <tr>
+        <td>ステータス</td>
+        <td>
+          <% if item.is_active == true %>
+           <p class="text-success">販売中</p>
+          <% else %>
+           <p class="text-secondary">販売停止中</p>
+          <% end %>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+ </div>
 <% end %>
-
 <%= paginate @items %>
-

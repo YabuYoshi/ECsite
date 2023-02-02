@@ -16,11 +16,11 @@
   <p>メールアドレス：<%= @customer.email %></p>
   <p>
     <% if @customer.is_deleted == false %>
-      会員ステータス 有効
+      会員ステータス<p class="text-success">有効</p>
     <% else %>
-      会員ステータス 退会
+      会員ステータス<p class="text-secondary">退会</p>
     <% end %>
   </p>
   <%= link_to "編集する", edit_admin_customer_path(@customer.id), class:"btn btn-success" %>
-  <%= link_to "注文履歴一覧を見る", admin_root_path, class:"btn btn-success" %>
+  <%= link_to "注文履歴一覧を見る", admin_root_path, class:"btn btn-primary" %>
 </div>

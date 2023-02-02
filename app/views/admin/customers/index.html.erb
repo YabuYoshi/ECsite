@@ -1,21 +1,36 @@
 <h2>会員一覧</h2>
 <% @customers.each do |customer| %>
-<div>
-  <p>会員ID：<%= customer.id %></p>
-  <%= link_to admin_customer_path(customer.id) do %>
-  <p>
-    氏名：<%= customer.last_name %><%= customer.first_name %>
-  </p>
-  <% end %>
-  <p>メールアドレス：<%= customer.email %></p>
-  <p>
-    <% if customer.is_deleted == false %>
-      ステータス: 有効
-    <% else %>
-      ステータス: 退会
-    <% end %>
-  </p>
-</div>
+ <div class="table table-bordered">
+  <table>
+    <tbody>
+      <tr>
+        <td>会員ID</td>
+        <td><%= customer.id %></td>
+      </tr>
+      <tr>
+        <td>氏名</td>
+        <td>
+          <%= link_to admin_customer_path(customer.id) do %>
+          <%= customer.last_name %><%= customer.first_name %>
+          <% end %>
+        </td>
+      </tr>
+      <tr>
+        <td>メールアドレス</td>
+        <td><%= customer.email %></td>
+      </tr>
+      <tr>
+        <td>ステータス</td>
+        <td>
+          <% if customer.is_deleted == false %>
+           <p class="text-success">有効</p>
+          <% else %>
+           <p class="text-secondary">退会</p>
+          <% end %>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+ </div>
 <% end %>
-
 <%= paginate @customers %>
