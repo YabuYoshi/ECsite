@@ -1,0 +1,33 @@
+"admin"
+homes_top
+ <th>注文ステータス</th>
+ <td><%= order.order_status_i18n %></td>
+
+orders_show
+    <%= form_with model: @order, url: admin_order_path(@order.id) do |f| %>
+    <tr>
+      <td>注文ステータス</td>
+      <td>
+          <%= f.select :order_status, Order.order_statuses_i18n.keys.map { |k| [t("enums.order.order_status.#{k}"), k] } %>
+          <%= f.submit "更新",class:"btn btn-success" %>
+      </td>
+    </tr>
+    <% end %>
+
+    <th>製作ステータス</th>
+                <%= form_with model: order_detail, url: admin_order_detail_path(order_detail.id) do |f| %>
+              <td>
+                <%= f.select :making_status, OrderDetail.making_statuses_i18n.keys.map { |k| [t("enums.order_detail.making_status.#{k}"), k] } %>
+                <%= f.submit "更新",class:"btn btn-success" %>
+              </td>
+              <% end %>
+          </tr>
+
+"public"
+orders_index
+ <th>ステータス</th>
+ <td><%= order.order_status_i18n %></td>
+
+orders_show
+ <th>ステータス</th>
+ <td><%= @order.order_status_i18n %></td>

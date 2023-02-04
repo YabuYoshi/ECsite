@@ -7,7 +7,7 @@ class Admin::ItemsController < ApplicationController
     @item = Item.new(item_params)
       if @item.save!
         flash[:notice] = 'item was successfully created.'
-        redirect_to "/admin/items"
+        redirect_to admin_item_path(@item.id)
       else
         render :new
       end
@@ -29,7 +29,7 @@ class Admin::ItemsController < ApplicationController
     @item = Item.find(params[:id])
       if @item.update(item_params)
         flash[:notice] = 'Item was successfully updated.'
-        redirect_to "/admin/items"
+        redirect_to admin_item_path(@item.id)
       else
         render :edit
       end

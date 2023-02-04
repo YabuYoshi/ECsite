@@ -1,9 +1,15 @@
 class Public::CartItemsController < ApplicationController
   def create
     #binding.pry
-    @cart_item = CartItem.new(cart_item_params)
+    @cart_item = current_customer.cart_items.find_by(item_id: params[:cart_item][:item_id])
       if customer_signed_in?
-        @cart_item.customer_id = current_customer.id
+        if @cart_item
+           @cart_item.amount += CartItem.new(cart_item_params).amount
+        else
+           @cart_item = CartItem.new(cart_item_params)
+           @cart_item.customer_id = current_customer.id
+        end
+
         if @cart_item.save!
           flash[:notice] = 'ModelClassName was successfully created.'
           redirect_to "/cart_items"

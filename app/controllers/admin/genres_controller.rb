@@ -3,10 +3,6 @@ class Admin::GenresController < ApplicationController
   def index
     @genre = Genre.new
     @genres = Genre.all
-    respond_to do |wants|
-      wants.html # index.html.erb
-      wants.xml  { render :xml => @genres }
-    end
   end
 
   def create
