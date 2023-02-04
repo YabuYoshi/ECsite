@@ -21,7 +21,7 @@
   </tbody>
 </table>
 
-<table>
+<table class="table table-bordered">
   <h2>注文内容</h2>
   <thead>
       <th>商品</th>
@@ -32,14 +32,14 @@
   <tbody>
   <% total = 0 %>
     <% @orders.each do |order| %>
-      <tr>
         <% order.order_details.each do |order_detail| %>
+        <tr>
         　<td><%= order_detail.item.name %></td>
           <td><%= order_detail.amount %></td>
           <td><%= (order_detail.price*1.1).floor %></td>
           <td><%= (order_detail.subtotal*1.1).floor %></td>
+        </tr>
         <% end %>
-      </tr>
     <% end %>
   </tbody>
 </table>

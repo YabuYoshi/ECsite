@@ -3,32 +3,25 @@
   <%= link_to '＋', "/admin/items/new",class:"btn btn-light" %>
 </p>
 
-<% @items.each do |item| %>
- <div class="table table-bordered">
-  <table>
+  <table class="table table-bordered">
+    <thead>
+      <th>商品ID</th>
+      <th>商品名</th>
+      <th>税抜価格</th>
+      <th>ジャンル名</th>
+      <th>ステータス</th>
+    </thead>
     <tbody>
+     <% @items.each do |item| %>
       <tr>
-        <td>商品ID</td>
         <td><%= item.id %></td>
-      </tr>
-      <tr>
-        <td>商品名</td>
         <td>
           <%= link_to admin_item_path(item.id) do %>
           <%= item.name %>
           <% end %>
         </td>
-      </tr>
-      <tr>
-        <td>税抜価格</td>
         <td><%= item.price %></td>
-      </tr>
-      <tr>
-        <td>ジャンル名</td>
         <td><%= item.genre.name %></td>
-      </tr>
-      <tr>
-        <td>ステータス</td>
         <td>
           <% if item.is_active == true %>
            <p class="text-success">販売中</p>
@@ -37,8 +30,7 @@
           <% end %>
         </td>
       </tr>
+     <% end %>
     </tbody>
   </table>
- </div>
-<% end %>
 <%= paginate @items %>

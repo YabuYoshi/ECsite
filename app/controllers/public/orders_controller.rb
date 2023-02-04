@@ -1,6 +1,10 @@
 class Public::OrdersController < ApplicationController
   def new
     @order = Order.new
+    @cart_items = current_customer.cart_items
+    if @cart_items.empty?
+      redirect_to cart_items_path
+    end
   end
 
   def create
@@ -24,25 +28,40 @@ class Public::OrdersController < ApplicationController
   end
 
   def index
-    @orders = Order.all
+    @orders = current_customer.orders
   end
 
   def show
     @order = Order.find(params[:id])
     @cart_items = current_customer.cart_items
     @order.shipping_cost = 800
-    @orders = Order.all
+    @orders = current_customer.orders
   end
 
   def confirm
-    @order = Order.new(order_params)
-    @address = Address.find(params[:order][:address_id])
-    @order.postal_code = @address.postal_code
-    @order.address = @address.address
-    @order.name = @address.name
-    @cart_items = current_customer.cart_items
-    @order.shipping_cost = 800
-    #binding.pry
+    if params[:order][:address_option] == "1"
+      @order = Order.new(order_params)
+      @order.postal_code = current_customer.postal_code
+      @order.address = current_customer.address
+      @order.name = current_customer.first_name + current_customer.last_name
+      @cart_items = current_customer.cart_items
+      @order.shipping_cost = 800
+
+    elsif params[:order][:address_option] == "2"
+      @order = Order.new(order_params)
+      @address = Address.find(params[:order][:address_id])
+      @order.postal_code = @address.postal_code
+      @order.address = @address.address
+      @order.name = @address.name
+      @cart_items = current_customer.cart_items
+      @order.shipping_cost = 800
+
+    elsif params[:order][:address_option] == "3"
+      @order = Order.new(order_params)
+      @cart_items = current_customer.cart_items
+      @order.shipping_cost = 800
+
+    end
   end
 
 

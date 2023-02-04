@@ -1,7 +1,7 @@
 class Public::AddressesController < ApplicationController
   def index
     @address = Address.new
-    @addresses = Address.all
+    @addresses = current_customer.addresses
   end
 
   def edit
@@ -40,6 +40,13 @@ class Public::AddressesController < ApplicationController
 
   def address_params
    params.require(:address).permit(:name, :postal_code, :address)
+  end
+
+  def is_matching_login_user
+    customer_id = params[:id].to_i
+    unless customer_id == current_customer.id
+      redirect_to root_path
+    end
   end
 
 end
