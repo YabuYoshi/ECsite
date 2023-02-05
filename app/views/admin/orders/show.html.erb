@@ -3,7 +3,7 @@
   <tbody>
     <tr>
       <td>購入者</td>
-      <td><%= @order.name %></td>
+      <td><%= @order.customer.last_name %><%= @order.customer.first_name %></td>
     </tr>
     <tr>
       <td>注文日</td>
@@ -21,15 +21,6 @@
       <td>支払方法</td>
       <td><%= @order.payment_method_i18n %></td>
     </tr>
-    <%= form_with model: @order, url: admin_order_path(@order.id) do |f| %>
-    <tr>
-      <td>注文ステータス</td>
-      <td>
-          <%= f.select :order_status, Order.order_statuses_i18n.keys.map { |k| [t("enums.order.order_status.#{k}"), k] } %>
-          <%= f.submit "更新",class:"btn btn-success" %>
-      </td>
-    </tr>
-    <% end %>
   </tbody>
 </table>
 
@@ -42,7 +33,6 @@
           <th>単価</th>
           <th>数量</th>
           <th>小計</th>
-          <th>製作ステータス</th>
       </thead>
       <tbody>
       <% total = 0 %>
@@ -52,12 +42,6 @@
               <td><%= order_detail.item.with_tax_price %></td>
               <td><%= order_detail.amount %></td>
               <td><%= order_detail.item.with_tax_price * order_detail.amount %></td>
-              <%= form_with model: order_detail, url: admin_order_detail_path(order_detail.id) do |f| %>
-              <td>
-                <%= f.select :making_status, OrderDetail.making_statuses_i18n.keys.map { |k| [t("enums.order_detail.making_status.#{k}"), k] } %>
-                <%= f.submit "更新",class:"btn btn-success" %>
-              </td>
-              <% end %>
           </tr>
       <% end %>
       </tbody>
